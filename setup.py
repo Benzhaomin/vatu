@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
 
-
 with open("README.md") as f:
     readme = f.read()
-
 
 setup(
     name="vatu",
@@ -26,7 +24,7 @@ setup(
         "vatu": [],
     },
     test_suite="tests",
-    entry_points = {
+    entry_points={
         "console_scripts": ["vatu = vatu.cli:main"],
     },
     install_requires=[],
