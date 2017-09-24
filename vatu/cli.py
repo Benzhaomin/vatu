@@ -3,9 +3,14 @@ import argparse
 
 import sys
 
+from vatu.run import Run
+from vatu.runner import Runner
+
 
 def cli(args):
-    print("welcome")
+    if args.command == 'run':
+        run = Run()
+        Runner.run(run)
 
 
 def parse_args(args):

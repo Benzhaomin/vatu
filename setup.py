@@ -29,6 +29,9 @@ setup(
     },
     install_requires=[],
     extras_require={
-        "dev": ["nose", "flake8"],
+        "dev": [
+            "flake8",
+            "nose",
+        ],
     },
 )
