@@ -1,0 +1,6 @@
+test:
+  image: python3.6
+  script:
+    - pip install -e .[dev]
+    - nosetests
+    - flake8 vatu
