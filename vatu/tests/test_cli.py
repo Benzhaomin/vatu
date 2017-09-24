@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from vatu.cli import cli, parse_args
+from vatu.cli import parse_args
 
 
 class TestCLI(unittest.TestCase):
@@ -10,8 +10,3 @@ class TestCLI(unittest.TestCase):
         """
         args = parse_args([])
         self.assertIsNotNone(args)
-
-    def test_cli(self):
-        """ check CLI invocation
-        """
-        cli([])
