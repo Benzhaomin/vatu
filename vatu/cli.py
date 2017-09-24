@@ -1,26 +1,60 @@
 # -*- coding: utf-8 -*-
 import argparse
-
 import sys
+import time
 
-from vatu.run import Run
+import logging
+
 from vatu.runner import Runner
 
 
-def cli(args):
-    if args.command == 'run':
-        run = Run()
-        Runner.run(run)
+def record(args):
+    if args.get('delay'):
+        logging.info('Delaying start for %s seconds', args.get('delay'))
+        time.sleep(args.get('delay'))
+
+    # TODO: support other devices
+    from vatu.device import Vega
+    device = Vega()
+    Runner.record(device)
 
 
-def parse_args(args):
+COMMANDS = {
+    'record': record,
+}
+
+
+def parse_args(argv):
     parser = argparse.ArgumentParser()
+    parser.add_argument('--verbose', '-v', action='count', default=0)
 
-    return parser.parse_args(args)
+    subparsers = parser.add_subparsers(help="command")
+
+    run_parser = subparsers.add_parser("run")
+    run_parser.add_argument("--delay", type=int, help="start recording after delay seconds")
+
+    return vars(parser.parse_args(argv))
+
+
+def setup_logging(verbosity):
+    if verbosity >= 2:
+        loglevel = logging.DEBUG
+    elif verbosity == 1:
+        loglevel = logging.INFO
+    else:
+        loglevel = logging.WARNING
+
+    logging.basicConfig(level=loglevel, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
 def main():
-    cli(parse_args(sys.argv[1:]))
+    args = parse_args(sys.argv[1:])
+    setup_logging(args.get('verbose'))
+
+    try:
+        COMMANDS.get('record')(args)
+    except IndexError:
+        print("Please provide a command name")
 
 
 if __name__ == "__main__":

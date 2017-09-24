@@ -20,7 +20,7 @@ class Runner:
         run['settings'] = device.read_settings()
         run['datapoints'] = []
         DB.save(run)
-        logger.info('Started a %s seconds Run', duration)
+        logger.info('Started a %s seconds run', duration)
 
         while not Runner._finished(run):
             loop_start = datetime.datetime.now()
@@ -30,14 +30,17 @@ class Runner:
             datapoint.update(device.read_sensors())
             run['datapoints'].append(datapoint)
             DB.save(run)
+            logger.debug('Datapoint recorded')
 
             # sleep unless we're done recording
             if not Runner._finished(run):
-                loop_has_taken = datetime.datetime.now() - loop_start
-                time.sleep(interval - loop_has_taken.total_seconds())
+                sleep_duration = interval - (datetime.datetime.now() - loop_start).total_seconds()
+                logger.debug('Sleeping for %s seconds', sleep_duration)
+                time.sleep(sleep_duration)
 
         run['end'] = datetime.datetime.now()
         DB.save(run)
+        logger.info('Run finished')
 
         return run
 
