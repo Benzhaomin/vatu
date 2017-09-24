@@ -1,11 +1,23 @@
 # -*- coding: utf-8 -*-
 import unittest
 import datetime
+import tempfile
 
 from vatu.db import DB
 
 
-class TestRun(unittest.TestCase):
+class TmpDatabaseTestCase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.tmpdir = tempfile.TemporaryDirectory()
+        DB.PATH = cls.tmpdir.name
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.tmpdir.cleanup()
+
+
+class TestRun(TmpDatabaseTestCase):
     def test_db(self):
         """ Simple save/load/delete test
         """
@@ -28,7 +40,7 @@ class TestRun(unittest.TestCase):
         loaded = DB.load('db-test-run')
         self.assertEqual(loaded, me)
 
-        DB.delete(me)
+        # DB.delete(me)
 
     def test_traversal(self):
         """ Very basic check for uuid sanitization

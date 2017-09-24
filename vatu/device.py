@@ -31,6 +31,22 @@ class Device:
         }
 
 
+class DummyDevice(Device):
+    name = 'Device Zero'
+    sensors = ['sensor-1', 'sensor-2']
+    settings = ['setting-1', 'setting-2']
+
+    def read_sensor(self, name):
+        if name in self.sensors:
+            return 0.0
+        return super().read_sensor(name)
+
+    def read_setting(self, name):
+        if name in self.settings:
+            return 0.0
+        return super().read_setting(name)
+
+
 class Vega(Device):
     name = 'Vega'
     sensors = [

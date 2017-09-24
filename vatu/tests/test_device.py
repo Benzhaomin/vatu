@@ -1,29 +1,13 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from vatu.device import Device, Vega
-
-
-class DeviceZero(Device):
-    name = 'Device Zero'
-    sensors = ['sensor-1', 'sensor-2']
-    settings = ['setting-1', 'setting-2']
-
-    def read_sensor(self, name):
-        if name in self.sensors:
-            return 0.0
-        return super().read_sensor(name)
-
-    def read_setting(self, name):
-        if name in self.settings:
-            return 0.0
-        return super().read_setting(name)
+from vatu.device import DummyDevice, Vega
 
 
 class TestDevice(unittest.TestCase):
     def setUp(self):
         super().setUp()
-        self.device = DeviceZero()
+        self.device = DummyDevice()
 
     def test_read_sensor(self):
         self.assertEqual(self.device.read_sensor('sensor-1'), 0.0)

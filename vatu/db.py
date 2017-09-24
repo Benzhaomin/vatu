@@ -5,14 +5,12 @@ import os
 
 from vatu.run import Run
 
-DBPATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data'))
-
-os.makedirs(DBPATH, exist_ok=True)
-
 
 class DB:
     """ Persists Run objects
     """
+
+    PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data'))
 
     @staticmethod
     def save(run):
@@ -39,7 +37,10 @@ class DB:
         """ Returns an absolute file path to a Run file based on its uuid
         """
         uuid = os.path.basename(uuid)  # no directory traversal plz
-        return os.path.join(DBPATH, uuid + '.json')
+        return os.path.join(DB.PATH, uuid + '.json')
+
+
+os.makedirs(DB.PATH, exist_ok=True)
 
 
 # JSON dates encoder and decoder from https://gist.github.com/abhinav-upadhyay/5300137
