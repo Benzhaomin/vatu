@@ -32,5 +32,3 @@ class TestDevice(unittest.TestCase):
             'setting-1': 0.0,
             'setting-2': 0.0,
         })
-
-

@@ -4,6 +4,8 @@ A tool to record and fine-tune power and clocks on AMD Radeon RX Vega cards.
 Useful for undervolting and overclocking your card to its sweet spot or to
 whatever spot is the sweetest to you.
 
+Disclaimer: this code is still a shell, no actual access to any device is implemented yet
+
 ## Install
 
 ```
