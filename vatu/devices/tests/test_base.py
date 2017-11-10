@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from vatu.device import DummyDevice, Vega
+from vatu.devices.base import DummyDevice
 
 
 class TestDevice(unittest.TestCase):
@@ -34,15 +34,3 @@ class TestDevice(unittest.TestCase):
         })
 
 
-class TestVega(unittest.TestCase):
-    def setUp(self):
-        super().setUp()
-        self.device = Vega()
-
-    def test_read_sensors(self):
-        # TODO: mock the sensors lib
-        self.assertIsNotNone(self.device.read_sensors())
-
-    def test_read_settings(self):
-        # TODO: mock the sensors lib
-        self.assertIsNotNone(self.device.read_settings())

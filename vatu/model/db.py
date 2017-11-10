@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import json
 import datetime
+import json
 import os
 
-from vatu.run import Run
+from vatu.model.run import Run
 
 
 class DB:

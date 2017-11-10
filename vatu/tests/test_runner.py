@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from unittest.mock import patch
 
-from vatu.device import DummyDevice
+from vatu.devices.base import DummyDevice
 from vatu.runner import Runner
 from vatu.tests.test_db import TmpDatabaseTestCase
 

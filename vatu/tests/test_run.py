@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
 
-from vatu.run import Run
+from vatu.model.run import Run
 
 
 class TestRun(unittest.TestCase):

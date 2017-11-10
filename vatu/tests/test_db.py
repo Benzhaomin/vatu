@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-import unittest
 import datetime
 import tempfile
+import unittest
 
-from vatu.db import DB
+from vatu.model.db import DB
 
 
 class TmpDatabaseTestCase(unittest.TestCase):

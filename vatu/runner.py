@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import datetime
-import time
 import logging
+import time
 
-from vatu.db import DB
-from vatu.run import Run
+from vatu.model.db import DB
+from vatu.model.run import Run
 
 logger = logging.getLogger('vatu.runner')
 

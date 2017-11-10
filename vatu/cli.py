@@ -2,7 +2,6 @@
 import argparse
 import sys
 import time
-
 import logging
 
 from vatu.runner import Runner
@@ -14,7 +13,7 @@ def record(args):
         time.sleep(args.get('delay'))
 
     # TODO: support other devices
-    from vatu.device import Vega
+    from vatu.devices.vega import Vega
     device = Vega()
     Runner.record(device)
 
