@@ -3,4 +3,4 @@ test:
   script:
     - pip install -e .[dev]
     - nosetests
-    - flake8 vatu
+    - flake8

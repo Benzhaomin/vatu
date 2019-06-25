@@ -1,0 +1,43 @@
+files:
+  core: /sys/class/drm/card0/device/pp_dpm_sclk
+  memory: /sys/class/drm/card0/device/pp_dpm_mclk
+  power: /sys/class/drm/card0/device/hwmon/hwmon0/power1_cap
+  powerplay: /sys/class/drm/card0/device/pp_od_clk_voltage
+  gpuinfo: /sys/kernel/debug/dri/0/amdgpu_pm_info
+
+readonly: true
+
+card:
+  power:
+    target: 200
+    limit: 220
+    step: 10
+  temperature: # °C
+    target: 45
+    limit: 70
+  load:
+    minimum: 80
+
+core:
+  clock: # Mhz
+    target: 1550
+    limit: 1630
+    step: 10
+  voltage: # mV
+    target: 1000
+    limit: 1200
+    step: 10
+
+memory:
+  clock: # Mhz
+    target: 950
+    limit: 1050
+    step: 10
+  voltage: # mV
+    target: 1000
+    limit: 1200
+    step: 10
+
+metrics:
+  enabled: false
+  outputdir: /tmp/vatu/

@@ -3,4 +3,4 @@ _pycache__/
 venv/
 vatu.egg-info/
 .idea/
-data/
+.coverage/
