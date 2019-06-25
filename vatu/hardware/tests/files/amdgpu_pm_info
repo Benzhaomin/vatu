@@ -1,0 +1,41 @@
+Clock Gating Flags Mask: 0xfe9fcf
+	Graphics Medium Grain Clock Gating: On
+	Graphics Medium Grain memory Light Sleep: On
+	Graphics Coarse Grain Clock Gating: On
+	Graphics Coarse Grain memory Light Sleep: On
+	Graphics Coarse Grain Tree Shader Clock Gating: Off
+	Graphics Coarse Grain Tree Shader Light Sleep: Off
+	Graphics Command Processor Light Sleep: On
+	Graphics Run List Controller Light Sleep: On
+	Graphics 3D Coarse Grain Clock Gating: On
+	Graphics 3D Coarse Grain memory Light Sleep: On
+	Memory Controller Light Sleep: On
+	Memory Controller Medium Grain Clock Gating: On
+	System Direct Memory Access Light Sleep: On
+	System Direct Memory Access Medium Grain Clock Gating: On
+	Bus Interface Medium Grain Clock Gating: On
+	Bus Interface Light Sleep: On
+	Unified Video Decoder Medium Grain Clock Gating: Off
+	Video Compression Engine Medium Grain Clock Gating: Off
+	Host Data Path Light Sleep: On
+	Host Data Path Medium Grain Clock Gating: Off
+	Digital Right Management Medium Grain Clock Gating: On
+	Digital Right Management Light Sleep: On
+	Rom Medium Grain Clock Gating: On
+	Data Fabric Medium Grain Clock Gating: On
+
+GFX Clocks and Power:
+	945 MHz (MCLK)
+	27 MHz (SCLK)
+	1138 MHz (PSTATE_SCLK)
+	800 MHz (PSTATE_MCLK)
+	975 mV (VDDGFX)
+	4.0 W (average GPU)
+
+GPU Temperature: 26 C
+GPU Load: 8 %
+
+SMC Feature Mask: 0x000000001ba1ff4f
+UVD: Disabled
+
+VCE: Disabled

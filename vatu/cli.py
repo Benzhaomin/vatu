@@ -1,38 +1,12 @@
 # -*- coding: utf-8 -*-
-import argparse
-import sys
-import time
 import logging
 
-from vatu.runner import Runner
+import click
 
-
-def record(args):
-    if args.get('delay'):
-        logging.info('Delaying start for %s seconds', args.get('delay'))
-        time.sleep(args.get('delay'))
-
-    # TODO: support other devices
-    from vatu.devices.vega import Vega
-    device = Vega()
-    Runner.record(device)
-
-
-COMMANDS = {
-    'record': record,
-}
-
-
-def parse_args(argv):
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--verbose', '-v', action='count', default=0)
-
-    subparsers = parser.add_subparsers(help="command")
-
-    run_parser = subparsers.add_parser("run")
-    run_parser.add_argument("--delay", type=int, help="start recording after delay seconds")
-
-    return vars(parser.parse_args(argv))
+from vatu.config import Config
+from vatu.engine.state import State
+from vatu.engine.timer import timer
+from vatu.engine.tuner import AbortTuningException, SpeedyTuner
 
 
 def setup_logging(verbosity):
@@ -46,14 +20,43 @@ def setup_logging(verbosity):
     logging.basicConfig(level=loglevel, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 
-def main():
-    args = parse_args(sys.argv[1:])
-    setup_logging(args.get('verbose'))
+@click.group()
+@click.option('-v', '--verbose', count=True)
+@click.option('-c', '--config', default=None, help="load configuration from this file")
+def cli(verbose, config):
+    """ Vega Auto Tuner
+    """
+    setup_logging(verbose)
+    if config:
+        Config.load(config)
 
+
+@cli.command(short_help='try to reach a power, clock or temperature target')
+@click.option('-d', '--duration', default=180)
+@click.option('-i', '--interval', default=15)
+def autotune(duration, interval):
+    initial_state = State()
+    logging.info('Initial state %s', initial_state)
     try:
-        COMMANDS.get('record')(args)
-    except IndexError:
-        print("Please provide a command name")
+        tuner = SpeedyTuner()
+        timer(tuner.tick, duration, interval)
+        final_state = State()
+        logging.info('Reached final state %s', final_state)
+    except AbortTuningException as exc:
+        logging.error(str(exc))
+    finally:
+        logging.info('Restoring initial state %s', initial_state)
+        initial_state.restore()
+
+
+@cli.command(short_help="show the card's current state")
+def show():
+    state = State()
+    print(state)
+
+
+def main():
+    cli()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,14 @@
+readonly: false
+metrics:
+  enabled: false
+
+card:
+  power:
+    limit: 280
+  load:
+    minimum: 30
+
+core:
+  clock:
+    limit: 1700
+    step: 5
